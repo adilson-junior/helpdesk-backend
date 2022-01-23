@@ -55,7 +55,9 @@ public class ClienteService {
 		//Verifica se o objeto existe no banco
 		Cliente updateObj = findById(id);
 		//Realiza o encoder da senha
-		//objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		if(!objDTO.getSenha().equals(updateObj.getSenha())) {
+			objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		}		
 		//Valida se o CPF já existe e se é o mesmo CPF da requisição
 		validaPorCpfEEmail(objDTO);
 		//Se tudo der certo um new objeto é instâciado recebendo o objDTO como parâmetros

@@ -55,7 +55,9 @@ public class TecnicoService {
 		//Verifica se o objeto existe no banco
 		Tecnico updateObj = findById(id);
 		//Realiza o encoder da senha
-		//objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		if(!objDTO.getSenha().equals(updateObj.getSenha())) {
+			objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		}		
 		//Valida se o CPF já existe e se é o mesmo CPF da requisição
 		validaPorCpfEEmail(objDTO);
 		//Se tudo der certo um new objeto é instâciado recebendo o objDTO como parâmetros
@@ -75,16 +77,15 @@ public class TecnicoService {
 		tecnicoRepository.deleteById(id);		
 	}
 
-	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
+    private void validaPorCpfEEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
-		//valida se ele existe e se ele existir verifica se o cpf é igual ao DTO para o caso de update
-		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
-			throw new DataIntegrityViolationException("Uma pessoa com cpf:"+objDTO.getCpf()+ "já foi cadstrado no sistema. ");
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
 		}
-		//valida se ele existe e se ele existir verifica se o E-mail é igual ao DTO para o caso de update
+
 		obj = pessoaRepository.findByEmail(objDTO.getEmail());
-		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
-			throw new DataIntegrityViolationException("Uma pessoa com E-mail:"+objDTO.getEmail()+ "já foi cadstrado no sistema. ");
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 	}
 
