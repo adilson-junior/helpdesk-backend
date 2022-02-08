@@ -14,6 +14,7 @@ Usuario: visitante@teste.com
 Senha: visitante
 
 Help Desk é uma aplicação Full Stack Web construída durante o curso "Formação Angular + Spring Boot" da plataforma [Udemy](https://www.udemy.com/course/formacao-angular-spring-boot "Site da Udemy").
+O projeto tem como objetivo principal abordar os conceitos de aplicações SPAs, Autenticação e Autorização com Tokens JWT e muito mais.
 
 A aplicação consiste em um sistema de abertura de chamados, onde os clientes e técnicos podem abrir chamados e definir o status e o grau de prioridade do atendimento.
 
@@ -28,7 +29,7 @@ A aplicação consiste em um sistema de abertura de chamados, onde os clientes e
 
 # Tecnologias utilizadas
 ## Back end
-- Java;
+- Java 11;
 - Spring Boot;
 - JPA / Hibernate;
 - Maven.
